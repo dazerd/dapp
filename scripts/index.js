@@ -1,4 +1,5 @@
 var accounts = [];
+var activeWallet = "";
 
 const setupConnection = () => {
 	if (window.ethereum) {
@@ -8,6 +9,7 @@ const setupConnection = () => {
 			console.log(accs);
 			alert('Connected Wallet');
 			accounts = accs
+			activeWallet = accounts[0];
 			setupDApp();
 		}).catch(er => {
 			// Problem connecting to users wallet
@@ -29,7 +31,11 @@ const setupDApp = () => {
 	`;
 
 	accounts.forEach(acc => {
-		html += `<li><b>${acc}</b></li>`;
+		if(activeWallet == acc) {
+			html += `<li><b>${acc}</b> - <i>Active Wallet</i></li>`;
+		} else {
+			html += `<li>${acc}</li>`;
+		}
 	});
 
 	html += `
@@ -44,7 +50,19 @@ const setupDApp = () => {
 	depositForm.addEventListener('submit', evt => {
 		evt.preventDefault();
 
-		alert(depositForm['deposit-amount'].value);
+		var depositValue = depositForm['deposit-amount'].value;
+
+		web3.eth.sendTransaction({
+			from: activeWallet,
+			to: privates.toAddress,
+			value: web3.utils.toWei(depositValue, 'ether'),
+		})
+		.then(function(receipt){
+			console.log("receipt: " + receipt);
+		})
+		.catch(er => {
+			console.log("error: " + er);
+		});
 	});
 
 	document.querySelector('#payment-area').style.display = 'block';
