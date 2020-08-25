@@ -1,0 +1,13 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	margin: 20px auto;
+	max-width: 1080px;
+}
+
+#payment-area {
+	display: none;
+}

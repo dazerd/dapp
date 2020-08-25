@@ -1,1 +1,36 @@
-Init Commit
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="style/style.css">
+
+	<title>DAPP</title>
+</head>
+
+<body>
+
+	<div class="container" id="content">
+		<h4>DAPP</h4>
+
+		<div id="acc-info"></div>
+		<div id="payment-area">
+			<form id="deposit-form">
+				<input type="text" id="deposit-amount" name="deposit-amount" placeholder="ETH Value">
+				<button type="submit">Deposit</button>
+			</form>
+		</div>
+	</div>
+
+	<script src="scripts/index.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			setupConnection();
+		});
+	</script>
+
+</body>
+
+</html>
